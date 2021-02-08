@@ -1,0 +1,45 @@
+{{- $src := .Src -}}
+{{ $image := (.Page.Resources.GetMatch  (index $src)) }}
+{{- with dict "Path" .Src "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $image = . -}}
+{{- end -}}
+
+
+{{ $src_set := ""}}
+
+{{ $src_set = (print $image.RelPermalink " " $image.Width "w") }}
+{{ $src := $image }}
+{{ $x_small := $image }}
+
+{{ if ge $image.Width "500"}}
+{{ $x_small = $image.Resize "500x" }}
+{{ $src_set = (print $src_set ", "  $x_small.RelPermalink " 500w") }}
+{{ end }}
+
+{{ if ge $image.Width "800"}}
+{{ $small := $image.Resize "800x" }}
+{{ $src_set = (print $src_set ", " $small.RelPermalink " 800w") }}
+{{ end }}
+
+{{ if ge $image.Width "1200"}}
+{{ $medium := $image.Resize "1200x" }}
+{{ $src_set = (print $src_set ", " $medium.RelPermalink " 1200w") }}
+{{ end }}
+
+{{ if gt $image.Width "1500"}}
+{{ $large := $image.Resize "1500x" }}
+{{ $src_set = (print $src_set ", " $large.RelPermalink " 1500w") }}
+{{ end }}
+{{- $alt := .Alt | default $image.RelPermalink -}}
+{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+    <a class="lightgallery" href="{{ $x_small.RelPermalink | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $x_small.RelPermalink | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+    <img
+        class="lazyload{{ with .Class }} {{ . }}{{ end }}"
+        src="{{ $loading.RelPermalink }}"
+        sizes="auto"
+        data-src="{{ $image.RelPermalink | safeURL }}"
+        data-srcset="{{ $src_set }}"
+        data-sizes="auto"
+        alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
+    </a>
+
