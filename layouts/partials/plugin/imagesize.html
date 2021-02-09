@@ -4,33 +4,51 @@
     {{- $image = . -}}
 {{- end -}}
 
-
+{{ $resize_optaion := ""}}
 {{ $src_set := ""}}
-
 {{ $src_set = (print $image.RelPermalink " " $image.Width "w") }}
 {{ $src := $image }}
 {{ $x_small := $image }}
 {{ $small := $image }}
 {{ $medium := $image }}
 {{ $large := $image }}
+{{ $orientation := 1 }}
+{{ with $image.Exif }}
+{{ with .Tags }}
+{{ with .Orientation }}
+{{ $orientation = . }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ if eq $orientation 6 }}
+    {{ $resize_optaion = " r270"}}
+{{ else if (eq $orientation 8) }}
+    {{ $resize_optaion = " r90"}}
+{{ end }}
+
 
 {{ if ge $image.Width "500"}}
-{{ $x_small = $image.Resize "500x" }}
+{{ $opt := (print "500x" $resize_optaion) }}
+{{ $x_small = $image.Resize $opt }}
 {{ $src_set = (print $src_set ", "  $x_small.RelPermalink " 500w") }}
 {{ end }}
 
 {{ if ge $image.Width "800"}}
-{{ $small = $image.Resize "800x" }}
+{{ $opt := (print "800x" $resize_optaion) }}
+{{ $small = $image.Resize $opt }}
 {{ $src_set = (print $src_set ", " $small.RelPermalink " 800w") }}
 {{ end }}
 
 {{ if ge $image.Width "1200"}}
-{{ $medium = $image.Resize "1200x" }}
+{{ $opt := (print "1200x" $resize_optaion) }}
+{{ $medium = $image.Resize $opt }}
 {{ $src_set = (print $src_set ", " $medium.RelPermalink " 1200w") }}
 {{ end }}
 
 {{ if gt $image.Width "1500"}}
-{{ $large = $image.Resize "1500x" }}
+{{ $opt := (print "1500x" $resize_optaion) }}
+{{ $large = $image.Resize $opt }}
 {{ $src_set = (print $src_set ", " $large.RelPermalink " 1500w") }}
 {{ end }}
 {{- $alt := .Alt | default $large.RelPermalink -}}
