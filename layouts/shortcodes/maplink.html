@@ -1,0 +1,6 @@
+{{- $destination := cond .IsNamedParams (.Get "href") (.Get 0) -}}
+
+
+<a href="https://www.google.com/maps/search/?api=1&query={{ $destination }}" target="_blank" rel="noopener noreffer">
+{{$destination}}
+</a>
