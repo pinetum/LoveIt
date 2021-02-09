@@ -33,13 +33,13 @@
 {{ $large = $image.Resize "1500x" }}
 {{ $src_set = (print $src_set ", " $large.RelPermalink " 1500w") }}
 {{ end }}
-{{- $alt := .Alt | default $image.RelPermalink -}}
+{{- $alt := .Alt | default $large.RelPermalink -}}
 {{- $loading := resources.Get "svg/loading.svg" | minify -}}
     <a class="lightgallery" data-srcset="{{ $src_set }}" href="{{ $large.RelPermalink | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $large.RelPermalink | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
     <img
         class="lazyload{{ with .Class }} {{ . }}{{ end }}"
         src="{{ $loading.RelPermalink }}"
-        data-src="{{ $image.RelPermalink | safeURL }}"
+        data-src="{{ $large.RelPermalink | safeURL }}"
         data-srcset="{{ $src_set }}"
         data-sizes="auto"
         alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
