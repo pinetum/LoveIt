@@ -4,15 +4,15 @@
     {{- /* Featured image */ -}}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
     {{- with .Resources.GetMatch "featured-image" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = . -}}
     {{- end -}}
     {{- with .Resources.GetMatch "featured-image-preview" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = . -}}
     {{- end -}}
     {{- with $image -}}
         <div class="featured-image-preview">
             <a href="{{ $.RelPermalink }}">
-                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/image.html" -}}
+                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/imagesize.html" -}}
             </a>
         </div>
     {{- end -}}

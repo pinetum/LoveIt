@@ -77,5 +77,5 @@
         src="{{ $loading.RelPermalink }}"
         data-srcset="{{ $src_set }}"
         data-sizes="auto"
-        alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
+        alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with $attrWidth }} width="{{ . }}"{{ end }} />
 {{- end -}}
