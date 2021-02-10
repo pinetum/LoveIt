@@ -36,3 +36,10 @@
         alt="{{ $alt }}"
         title="{{ .Title | default $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
 {{- end -}}
+
+<style>img::before {
+    display: block;
+    content: '';
+    padding-top: calc(100% * 2 / 3);
+    /* You could reduce this expression with a preprocessor or by doing the math. I've kept the longer form in `calc()` to make the math more readable for this demo. */
+  }</style>

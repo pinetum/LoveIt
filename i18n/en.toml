@@ -1,195 +1,200 @@
-# Translations for English
+# Translations for Simplified Chinese
+# 簡體中文的翻譯
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
 [backToTop]
-other = "Back to Top"
+other = "回到頂部"
 
 [viewComments]
-other = "View Comments"
+other = "查看評論"
 # === baseof ==
 
 # === Post ===
 [posts]
-other = "Posts"
+other = "文章"
 # === Post ===
 
 # === Taxonomy ===
 [allSome]
-other = "All {{ .Some }}"
+other = "所有{{ .Some }}"
 
 [tag]
-other = "Tag"
+other = "標簽"
 
 [tags]
-other = "Tags"
+other = "標簽"
 
 [category]
-other = "Category"
+other = "分類"
 
 [categories]
-other = "Categories"
+other = "分類"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "More"
+other = "更多"
 # === Pagination ===
 
 # === partials/header.html ===
 [selectLanguage]
-other = "Select Language"
+other = "選擇語言"
 
 [switchTheme]
-other = "Switch Theme"
+other = "切換主題"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
+other = ""
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "zh-cn"
 
 [valinePlaceholder]
-other = "Your comment ..."
+other = "你的評論 ..."
 
 [facebookLanguageCode]
-other = "en_US"
+other = "zh_TW"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [search]
-other = "Search"
+other = "搜尋"
 
 [searchPlaceholder]
-other = "Search titles or contents..."
+other = "搜尋文章標題或內容..."
 
 [clear]
-other = "Clear"
+other = "清空"
 
 [cancel]
-other = "Cancel"
+other = "取消"
 
 [noResultsFound]
-other = "No results found"
+other = "沒有找到結果"
 
 [lunrLanguageCode]
-other = "en"
+other = "zh"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.zh.js"
+
+[lunrSegmentitLib]
+other = "lib/lunr/lunr.segmentit.js"
 
 [copyToClipboard]
-other = "Copy to clipboard"
+other = "複製到剪貼簿"
 
 [cookieconsentMessage]
-other = "This website uses Cookies to improve your experience."
+other = "本網站使用 Cookies 來改善您的瀏覽體驗."
 
 [cookieconsentDismiss]
-other = "Got it!"
+other = "同意"
 
 [cookieconsentLink]
-other = "Learn more"
+other = "了解更多"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Share on"
+other = "分享到"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contents"
+other = "目錄"
 
 [publishedOnDate]
-other = "published on {{ .Date }}"
+other = "發表於 {{ .Date }}"
 
 [includedInCategories]
-other = "included in {{ .Categories }}"
+other = "收錄於 {{ .Categories }}"
 
 [wordCount]
-one = "One word"
-other = "{{ .Count }} words"
+other = "約 {{ .Count }} 字"
 
 [readingTime]
-one = "One minute"
-other = "{{ .Count }} minutes"
+other = "預計閱讀時間為 {{ .Count }} 分鐘"
 
 [views]
-other = "views"
+other = "次閱讀"
 
 [author]
-other = "Author"
+other = "作者"
 
 [updatedOnDate]
-other = "Updated on {{ .Date }}"
+other = "更新於 {{ .Date }}"
 
 [readMarkdown]
-other = "Read Markdown"
+other = "閱讀原始文檔"
 
 [back]
-other = "Back"
+other = "返回"
 
 [home]
-other = "Home"
+other = "主頁"
 
 [readMore]
-other = "Read More"
+other = "閱讀全文"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page not found"
+other = "頁面沒找到"
 
 [pageNotFoundText]
-other = "The page you're looking for doesn't exist. Sorry."
+other = "抱歉，您要查找的頁面不存在。"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
 [note]
-other = "Note"
+other = "注意"
 
 [abstract]
-other = "Abstract"
+other = "摘要"
 
 [info]
-other = "Info"
+other = "信息"
 
 [tip]
-other = "Tip"
+other = "技巧"
 
 [success]
-other = "Success"
+other = "成功"
 
 [question]
-other = "Question"
+other = "問題"
 
 [warning]
-other = "Warning"
+other = "警告"
 
 [failure]
-other = "Failure"
+other = "失敗"
 
 [danger]
-other = "Danger"
+other = "危險"
 
 [bug]
 other = "Bug"
 
 [example]
-other = "Example"
+other = "示例"
 
 [quote]
-other = "Quote"
+other = "引用"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NEW"
+other = "新增"
 
 [changed]
-other = "CHANGED"
+other = "更改"
 
 [deleted]
-other = "DELETED"
+other = "刪除"
 # === shortcodes/version.html ===

@@ -6,8 +6,8 @@
 
 {{ $resize_optaion := ""}}
 {{ $src_set := ""}}
-{{ $src_set = (print $image.RelPermalink " " $image.Width "w") }}
 {{ $src := $image }}
+{{ $xx_small := $image }}
 {{ $x_small := $image }}
 {{ $small := $image }}
 {{ $medium := $image }}
@@ -27,6 +27,9 @@
     {{ $resize_optaion = " r90"}}
 {{ end }}
 
+{{ $opt := (print "300x" $resize_optaion) }}
+{{ $xx_small = $image.Resize $opt }}
+{{ $src_set = (print $xx_small.RelPermalink " 300w") }}
 
 {{ if ge $image.Width "500"}}
 {{ $opt := (print "500x" $resize_optaion) }}
@@ -46,20 +49,33 @@
 {{ $src_set = (print $src_set ", " $medium.RelPermalink " 1200w") }}
 {{ end }}
 
-{{ if gt $image.Width "1500"}}
-{{ $opt := (print "1500x" $resize_optaion) }}
+{{ if gt $image.Width "1800"}}
+{{ $opt := (print "1800x" $resize_optaion) }}
 {{ $large = $image.Resize $opt }}
-{{ $src_set = (print $src_set ", " $large.RelPermalink " 1500w") }}
+{{ $src_set = (print $src_set ", " $large.RelPermalink " 1800w") }}
 {{ end }}
 {{- $alt := .Alt | default $large.RelPermalink -}}
 {{- $loading := resources.Get "svg/loading.svg" | minify -}}
-    <a class="lightgallery" data-srcset="{{ $src_set }}" href="{{ $large.RelPermalink | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $large.RelPermalink | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+
+{{ $attrWidth := "100%" }}
+{{ with .Width }}
+{{ $attrWidth = . }}
+{{end}}
+
+{{- if .Linked -}}
+<a class="lightgallery" data-srcset="{{ $src_set }}" href="{{ $large.RelPermalink | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $xx_small.RelPermalink | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
     <img
-        class="lazyload{{ with .Class }} {{ . }}{{ end }}"
+        class="lazyload {{ with .Class }} {{ . }}{{ end }}"
         src="{{ $loading.RelPermalink }}"
-        data-src="{{ $large.RelPermalink | safeURL }}"
+        data-srcset="{{ $src_set }}"
+        data-sizes="auto"
+        alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with $attrWidth }} width="{{ . }}"{{ end }} />
+    </a>
+{{- else -}}
+<img
+        class="lazyload {{ with .Class }} {{ . }}{{ end }}"
+        src="{{ $loading.RelPermalink }}"
         data-srcset="{{ $src_set }}"
         data-sizes="auto"
         alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
-    </a>
-
+{{- end -}}
