@@ -66,11 +66,11 @@
         {{- /* Featured image */ -}}
         {{- $image := $params.featuredimage -}}
         {{- with .Resources.GetMatch "featured-image" -}}
-            {{- $image = .RelPermalink -}}
+            {{- $image = . -}}
         {{- end -}}
         {{- with $image -}}
             <div class="featured-image">
-                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/image.html" -}}
+                {{- dict "Src" . "Title" $.Description "Resources" $.Resources "Watermark" $.Site.Params.watermark | partial "plugin/imagesize.html" -}}
             </div>
         {{- end -}}
 

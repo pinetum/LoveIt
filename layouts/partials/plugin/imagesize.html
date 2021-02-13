@@ -4,6 +4,8 @@
     {{- $image = . -}}
 {{- end -}}
 
+
+
 {{ $resize_optaion := ""}}
 {{ $src_set := ""}}
 {{ $src := $image }}
@@ -27,20 +29,30 @@
     {{ $resize_optaion = " r90"}}
 {{ end }}
 
+
+{{- with dict "Path" .Watermark "Resources" .Resources | partial "function/resource.html" -}}
+    {{ $tempWatermarkW := div $image.Width 3 }}
+    {{ $tempWatermark := .Resize (print $tempWatermarkW "x") }}
+    {{ $x := div $image.Width 50 }}
+    {{ $y := sub (sub $image.Height $tempWatermark.Height) $x }}
+    {{ $image = $image.Filter (images.Overlay $tempWatermark $x $y )}}
+{{ end }}
+
+
 {{ $opt := (print "300x" $resize_optaion) }}
 {{ $xx_small = $image.Resize $opt }}
 {{ $src_set = (print $xx_small.RelPermalink " 300w") }}
 
 {{ if ge $image.Width "500"}}
-{{ $opt := (print "500x" $resize_optaion) }}
-{{ $x_small = $image.Resize $opt }}
-{{ $src_set = (print $src_set ", "  $x_small.RelPermalink " 500w") }}
+    {{ $opt := (print "500x" $resize_optaion) }}
+    {{ $x_small = $image.Resize $opt }}
+    {{ $src_set = (print $src_set ", "  $x_small.RelPermalink " 500w") }}
 {{ end }}
 
 {{ if ge $image.Width "800"}}
-{{ $opt := (print "800x" $resize_optaion) }}
-{{ $small = $image.Resize $opt }}
-{{ $src_set = (print $src_set ", " $small.RelPermalink " 800w") }}
+    {{ $opt := (print "800x" $resize_optaion) }}
+    {{ $small = $image.Resize $opt }}
+    {{ $src_set = (print $src_set ", " $small.RelPermalink " 800w") }}
 {{ end }}
 
 {{ if ge $image.Width "1200"}}
@@ -79,3 +91,5 @@
         data-sizes="auto"
         alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with $attrWidth }} width="{{ . }}"{{ end }} />
 {{- end -}}
+
+
