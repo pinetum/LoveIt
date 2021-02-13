@@ -31,9 +31,9 @@
 
 
 {{- with dict "Path" .Watermark "Resources" .Resources | partial "function/resource.html" -}}
-    {{ $tempWatermarkW := div $image.Width 3 }}
+    {{ $tempWatermarkW := div $image.Width 4 }}
     {{ $tempWatermark := .Resize (print $tempWatermarkW "x") }}
-    {{ $x := div $image.Width 50 }}
+    {{ $x := div $image.Width 40 }}
     {{ $y := sub (sub $image.Height $tempWatermark.Height) $x }}
     {{ $image = $image.Filter (images.Overlay $tempWatermark $x $y )}}
 {{ end }}
